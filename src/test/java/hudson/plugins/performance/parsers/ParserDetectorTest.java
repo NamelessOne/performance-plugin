@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import org.junit.Test;
 import org.jvnet.hudson.test.Issue;
@@ -42,6 +43,9 @@ public class ParserDetectorTest {
 
         filePath = getClass().getResource("/lr-session.mdb").toURI().getPath();
         assertEquals(LoadRunnerParser.class.getSimpleName(), ParserDetector.detect(filePath));
+
+        filePath = getClass().getResource("/phout.txt").toURI().getPath();
+        assertEquals(PhantomParser.class.getSimpleName(), ParserDetector.detect(filePath));
     }
 
     @Issue("JENKINS-44317")

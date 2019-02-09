@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,7 +51,10 @@ public class ParserDetector {
                 return JmeterSummarizerParser.class.getSimpleName();
             } else if (isLoadRunnerFileType(line)) {
                 return LoadRunnerParser.class.getSimpleName();
-            } else {
+            } else if (isPhantomFileType(line)) {
+                return PhantomParser.class.getSimpleName();
+            }
+            else {
                 try {
                     return detectXMLFileType(reportPath);
                 } catch (IllegalArgumentException ex) {
@@ -122,6 +128,18 @@ public class ParserDetector {
 
         return line.length() > pattern.length() &&
             pattern.equals(line.substring(0, pattern.length()));
+    }
+
+    /**
+     * Detect phantom file type.
+     * http://www.garykessler.net/library/file_sigs.html
+     */
+    private static boolean isPhantomFileType(String line) {
+        ArrayList<String> segments = new ArrayList(Arrays.asList(line.split(" ")));
+        while(segments.contains("")) {
+            segments.remove("");
+        }
+        return segments.size() == 11 || segments.size() == 12;
     }
 
     /**
