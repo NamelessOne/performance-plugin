@@ -67,7 +67,7 @@ public class PhantomParser extends AbstractParser{
                 sample.setSizeInKb(Double.valueOf(segments.get(8)) / 1024);
                 String httpCode = segments.get(10);
                 sample.setHttpCode(httpCode);
-                sample.setSuccessful(Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
+                sample.setSuccessful("0".equals(segments.get(9)) && Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
                 report.addSample(sample);
             } else if (segments.size() == 12) {
                 HttpSample sample = new HttpSample();
@@ -78,7 +78,7 @@ public class PhantomParser extends AbstractParser{
                 sample.setSizeInKb(Double.valueOf(segments.get(9)) / 1024);
                 String httpCode = segments.get(11);
                 sample.setHttpCode(httpCode);
-                sample.setSuccessful(Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
+                sample.setSuccessful("0".equals(segments.get(10)) && Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
                 report.addSample(sample);
             }
         }
