@@ -27,7 +27,6 @@ public class PhantomParser extends AbstractParser{
     }
 
     public PhantomParser(String glob, String percentiles) {
-        //TODO
         super(glob, percentiles, PerformanceReport.INCLUDE_ALL);
     }
 
@@ -38,7 +37,6 @@ public class PhantomParser extends AbstractParser{
 
     @Override
     PerformanceReport parse(File reportFile) throws Exception {
-        //TODO
         clearDateFormat();
 
         final PerformanceReport report = createPerformanceReport();
@@ -61,24 +59,26 @@ public class PhantomParser extends AbstractParser{
             }
 
             if (segments.size() == 11) {
-                //TODO
                 HttpSample sample = new HttpSample();
                 long epoch = (long)(Double.parseDouble(segments.get(0)) * 1000);
                 sample.setDate(new Date(epoch));
                 sample.setUri("");
                 sample.setDuration(Long.valueOf(segments.get(1)));
                 sample.setSizeInKb(Double.valueOf(segments.get(8)) / 1024);
-                sample.setHttpCode(segments.get(10));
+                String httpCode = segments.get(10);
+                sample.setHttpCode(httpCode);
+                sample.setSuccessful(Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
                 report.addSample(sample);
             } else if (segments.size() == 12) {
-                //TODO
                 HttpSample sample = new HttpSample();
                 long epoch = (long)(Double.parseDouble(segments.get(0)) * 1000);
                 sample.setDate(new Date(epoch));
                 sample.setUri(segments.get(1));
                 sample.setDuration(Long.valueOf(segments.get(2)));
                 sample.setSizeInKb(Double.valueOf(segments.get(9)) / 1024);
-                sample.setHttpCode(segments.get(11));
+                String httpCode = segments.get(11);
+                sample.setHttpCode(httpCode);
+                sample.setSuccessful(Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
                 report.addSample(sample);
             }
         }
