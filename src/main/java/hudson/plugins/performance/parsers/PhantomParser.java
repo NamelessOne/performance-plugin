@@ -23,7 +23,7 @@ public class PhantomParser extends AbstractParser{
 
     @Override
     public String getDefaultGlobPattern() {
-        return "**/phout.txt";
+        return "**/phout*.log";
     }
 
     public PhantomParser(String glob, String percentiles) {
@@ -52,35 +52,21 @@ public class PhantomParser extends AbstractParser{
 
     private void parsePhantom(BufferedReader fileReader, PerformanceReport report) throws IOException {
         String line;
-        while (((line = fileReader.readLine()) != null)) {
-            ArrayList<String> segments = new ArrayList(Arrays.asList(line.split(" ")));
-            while (segments.contains("")) {
-                segments.remove("");
-            }
+        while ((line = fileReader.readLine()) != null) {
+            ArrayList<String> segments = new ArrayList(Arrays.asList(line.split("\t")));
 
-            if (segments.size() == 11) {
-                HttpSample sample = new HttpSample();
-                long epoch = (long)(Double.parseDouble(segments.get(0)) * 1000);
-                sample.setDate(new Date(epoch));
-                sample.setUri("");
-                sample.setDuration(Long.valueOf(segments.get(1)));
-                sample.setSizeInKb(Double.valueOf(segments.get(8)) / 1024);
-                String httpCode = segments.get(10);
-                sample.setHttpCode(httpCode);
-                sample.setSuccessful("0".equals(segments.get(9)) && Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
-                report.addSample(sample);
-            } else if (segments.size() == 12) {
-                HttpSample sample = new HttpSample();
-                long epoch = (long)(Double.parseDouble(segments.get(0)) * 1000);
-                sample.setDate(new Date(epoch));
-                sample.setUri(segments.get(1));
-                sample.setDuration(Long.valueOf(segments.get(2)));
-                sample.setSizeInKb(Double.valueOf(segments.get(9)) / 1024);
-                String httpCode = segments.get(11);
-                sample.setHttpCode(httpCode);
-                sample.setSuccessful("0".equals(segments.get(10)) && Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
-                report.addSample(sample);
-            }
+            HttpSample sample = new HttpSample();
+
+            long epoch = (long)(Double.parseDouble(segments.get(0)) * 1000);
+            sample.setDate(new Date(epoch));
+            sample.setUri(segments.get(1));
+            sample.setDuration(Long.valueOf(segments.get(2)));
+            sample.setSizeInKb((Double.valueOf(segments.get(9)) + Double.valueOf(segments.get(8))) / 1024);
+            String httpCode = segments.get(11);
+            sample.setHttpCode(httpCode);
+            sample.setSuccessful("0".equals(segments.get(10)) && Integer.parseInt(httpCode) >= 200 && Integer.parseInt(httpCode) < 300);
+            
+            report.addSample(sample);
         }
     }
 }

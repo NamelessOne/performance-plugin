@@ -5,6 +5,7 @@ import hudson.plugins.performance.parsers.JMeterCsvParser;
 import hudson.plugins.performance.parsers.JMeterParser;
 import hudson.plugins.performance.parsers.JUnitParser;
 import hudson.plugins.performance.parsers.JmeterSummarizerParser;
+import hudson.plugins.performance.parsers.PhantomParser;
 import hudson.plugins.performance.parsers.TaurusParser;
 import hudson.plugins.performance.parsers.WrkSummarizerParser;
 import org.junit.After;
@@ -54,6 +55,10 @@ public class PerformanceReportParserDescriptorTest {
         PerformanceReportParserDescriptor descriptor7 = PerformanceReportParserDescriptor.getById(WrkSummarizerParser.DescriptorImpl.class.getName());
         assertNotNull(descriptor7);
         assertTrue(descriptor7 instanceof WrkSummarizerParser.DescriptorImpl);
+
+        PerformanceReportParserDescriptor descriptor8 = PerformanceReportParserDescriptor.getById(PhantomParser.DescriptorImpl.class.getName());
+        assertNotNull(descriptor8);
+        assertTrue(descriptor8 instanceof PhantomParser.DescriptorImpl);
 
         assertNull(ConstraintDescriptor.getById("null"));
     }

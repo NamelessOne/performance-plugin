@@ -13,7 +13,7 @@ public class PhantomParserTest {
     @Test
     public void testParse() throws Exception {
         PhantomParser phantomParser = new PhantomParser(null, PerformanceReportTest.DEFAULT_PERCENTILES);
-        File summaryLogFile = new File(getClass().getResource("/phout.txt").toURI());
+        File summaryLogFile = new File(getClass().getResource("/phout.log").toURI());
         PerformanceReport performanceReport = phantomParser.parse(summaryLogFile);
 
         assertEquals(13, performanceReport.samplesCount());
