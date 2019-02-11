@@ -57,6 +57,9 @@ public class ParserFactoryTest {
 
         filePath = getClass().getResource("/summary.log").toURI().getPath();
         assertTrue(ParserFactory.getParser(build, workspace, null, filePath, envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof JmeterSummarizerParser);
+
+        filePath = getClass().getResource("/phout.log").toURI().getPath();
+        assertTrue(ParserFactory.getParser(build, workspace, null, filePath, envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof PhantomParser);
     }
 
     @Test
@@ -69,7 +72,7 @@ public class ParserFactoryTest {
         assertTrue(ParserFactory.getParser(null, null, null, "**/*.wrk", envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof WrkSummarizerParser);
         assertTrue(ParserFactory.getParser(null, null, null, "**/*.csv", envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof JMeterCsvParser);
         assertTrue(ParserFactory.getParser(null, null, null, "**/*.log", envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof JmeterSummarizerParser);
-        assertTrue(ParserFactory.getParser(null, null, null, "**/phout.txt", envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof PhantomParser);
+        assertTrue(ParserFactory.getParser(null, null, null, "**/phout*.log", envVars, PerformanceReportTest.DEFAULT_PERCENTILES, PerformanceReport.INCLUDE_ALL).get(0) instanceof PhantomParser);
     }
 
     @Test

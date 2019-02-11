@@ -29,7 +29,7 @@ public class ParserFactory {
         defaultGlobPatterns.put("**/*.xml", TaurusParser.class.getSimpleName());
         defaultGlobPatterns.put("**/*.wrk", WrkSummarizerParser.class.getSimpleName());
         defaultGlobPatterns.put("**/*.mdb", LoadRunnerParser.class.getSimpleName());
-        defaultGlobPatterns.put("**/phout.txt", PhantomParser.class.getSimpleName());
+        defaultGlobPatterns.put("**/phout*.log", PhantomParser.class.getSimpleName());
     }
 
     public static List<PerformanceReportParser> getParser(Run<?, ?> build, FilePath workspace, PrintStream logger, String glob, 

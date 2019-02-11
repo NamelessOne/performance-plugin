@@ -63,6 +63,7 @@ import hudson.plugins.performance.parsers.JUnitParser;
 import hudson.plugins.performance.parsers.JmeterSummarizerParser;
 import hudson.plugins.performance.parsers.ParserFactory;
 import hudson.plugins.performance.parsers.PerformanceReportParser;
+import hudson.plugins.performance.parsers.PhantomParser;
 import hudson.plugins.performance.parsers.TaurusParser;
 import hudson.plugins.performance.parsers.WrkSummarizerParser;
 import hudson.plugins.performance.reports.AbstractReport;
@@ -1413,6 +1414,7 @@ public class PerformancePublisher extends Recorder implements SimpleBuildStep {
         Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.JmeterSummarizerParser", JmeterSummarizerParser.class);
         Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.JUnitParser", JUnitParser.class);
         Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.PerformanceReportParser", PerformanceReportParser.class);
+        Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.PhantomParser", PhantomParser.class);
         Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.TaurusParser", TaurusParser.class);
         Items.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.WrkSummarizerParser", WrkSummarizerParser.class);
 
@@ -1451,6 +1453,7 @@ public class PerformancePublisher extends Recorder implements SimpleBuildStep {
         Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.JmeterSummarizerParser", JmeterSummarizerParser.class);
         Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.JUnitParser", JUnitParser.class);
         Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.PerformanceReportParser", PerformanceReportParser.class);
+        Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.PhantomParser", PhantomParser.class);
         Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.TaurusParser", TaurusParser.class);
         Run.XSTREAM2.addCompatibilityAlias("hudson.plugins.performance.WrkSummarizerParser", WrkSummarizerParser.class);
 

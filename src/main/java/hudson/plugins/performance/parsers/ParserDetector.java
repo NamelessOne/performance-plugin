@@ -135,11 +135,8 @@ public class ParserDetector {
      * http://www.garykessler.net/library/file_sigs.html
      */
     private static boolean isPhantomFileType(String line) {
-        ArrayList<String> segments = new ArrayList(Arrays.asList(line.split(" ")));
-        while(segments.contains("")) {
-            segments.remove("");
-        }
-        return segments.size() == 11 || segments.size() == 12;
+        ArrayList<String> segments = new ArrayList(Arrays.asList(line.split("\t")));
+        return segments.size() == 12;
     }
 
     /**

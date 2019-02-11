@@ -44,7 +44,7 @@ public class ParserDetectorTest {
         filePath = getClass().getResource("/lr-session.mdb").toURI().getPath();
         assertEquals(LoadRunnerParser.class.getSimpleName(), ParserDetector.detect(filePath));
 
-        filePath = getClass().getResource("/phout.txt").toURI().getPath();
+        filePath = getClass().getResource("/phout.log").toURI().getPath();
         assertEquals(PhantomParser.class.getSimpleName(), ParserDetector.detect(filePath));
     }
 
